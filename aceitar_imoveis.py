@@ -5,7 +5,7 @@ import time
 botoes = ['plus.PNG', 'check.PNG', 'aprovar.PNG', 'ok.PNG']
 
 # Tempo de espera entre as ações (em segundos)
-INTERVALO = 6 # Ajuste conforme necessário
+INTERVALO = 8 # Ajuste conforme necessário
 
 def clicar_no_botao(imagem, timeout=15, conf=0.9):
     """Procura e clica no botão na tela."""
@@ -23,11 +23,10 @@ def clicar_no_botao(imagem, timeout=15, conf=0.9):
         time.sleep(0.5)
     return False
 
-def scrollar_para_baixo(qtd=50):
-    """Pressiona a seta para baixo qtd vezes para garantir que todos os elementos estejam visíveis."""
-    for _ in range(qtd):
-        pyautogui.press('down')
-        time.sleep(0.03)
+def scrollar_para_baixo():
+    """Rola até o final da página de forma rápida usando a tecla END."""
+    pyautogui.press('end')
+    time.sleep(0.5)  # Pequena pausa para garantir que tudo carregou
 
 def fluxo_aceitacao():
     while True:
@@ -39,7 +38,7 @@ def fluxo_aceitacao():
         time.sleep(INTERVALO)
 
         print("Scrollando para baixo para garantir visibilidade dos próximos botões...")
-        scrollar_para_baixo(30)
+        scrollar_para_baixo()
         time.sleep(1)
 
         print("Procurando o botão CHECK...")
